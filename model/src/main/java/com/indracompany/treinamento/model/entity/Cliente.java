@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "clientes")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Cliente extends GenericEntity<Long>{
+public class Cliente extends GenericEntity<Long> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

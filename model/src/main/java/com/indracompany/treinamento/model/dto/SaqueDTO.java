@@ -5,10 +5,12 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class SaqueDTO implements Serializable{
+public class SaqueDTO implements Serializable {
 
 	private String agencia;
+	
 	private String numeroConta;
+	
 	private double valor;
 	
 }

@@ -23,13 +23,13 @@ import com.indracompany.treinamento.model.service.ContaBancariaService;
 
 @RestController
 @RequestMapping("rest/contas")
-public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, ContaBancariaService>{
+public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, ContaBancariaService> {
 	
 	@Autowired
 	private ContaBancariaService contaBancariaService;
 	
 	@GetMapping(value = "/consultar-saldo/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Double> consultarSaldo(String agencia, String numeroConta){
+	public @ResponseBody ResponseEntity<Double> consultarSaldo(@PathVariable String agencia, @PathVariable String numeroConta){
 		double saldo = contaBancariaService.consultarSaldo(agencia, numeroConta);
 		return new ResponseEntity<>(saldo, HttpStatus.OK);
 	}
@@ -45,13 +45,13 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 	
 	@PutMapping(value = "/deposito", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Void> depositar(@RequestBody DepositoDTO dto){
-		contaBancariaService.depositar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor());
+		contaBancariaService.depositar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor(), false);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/saque", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Void> sacar(@RequestBody SaqueDTO dto){
-		contaBancariaService.sacar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor());
+		contaBancariaService.sacar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor(), false);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

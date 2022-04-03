@@ -14,7 +14,7 @@ import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Service
-public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
+public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository> {
 	
 	@Override
 	public Cliente salvar(Cliente cli) throws AplicacaoException {
