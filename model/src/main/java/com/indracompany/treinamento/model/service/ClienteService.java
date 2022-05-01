@@ -19,22 +19,20 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	@Override
 	public Cliente salvar(Cliente cli) throws AplicacaoException {
 		
-		Cliente c = this.buscarCliente(cli.getCpf());
+		Cliente c = repository.findByCpf(cli.getCpf());
 		 
-		if (c != null) {
-			
-			if (cli.getId() == null) {
-				throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_JA_CADASTRADO);
-			}
-			
-			if (!cli.getId().equals(c.getId())) {
-				throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_JA_CADASTRADO);
-			}
+		if (c == null) {
+			cli.setId(null);
+			return super.salvar(cli);
+		}
+		
+		if (!c.getId().equals(cli.getId())) {
+			super.salvar(cli);
 		}
 		
 		return super.salvar(cli);
 	}
-
+	
 	public Cliente buscarCliente(String cpf) { 
 
 		boolean cpfValido = cpf != null && CpfUtil.validaCPF(cpf);

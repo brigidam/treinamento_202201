@@ -1,0 +1,30 @@
+<p>Digite os dados da conta e o valor que deseja Transferir!</p>
+
+
+<form [formGroup]="formConta"(ngSubmit)="transferir()">
+    <div class="mb-3">
+      <label for="agencia" class="form-label">Agência de Origem</label>
+      <input type="text" readonly class="form-control-plaintext" class="form-control" id="agenciaOrigem" formControlName="agenciaOrigem">
+    </div>
+    <div class="mb-3">
+      <label for="numero" class="form-label">Conta de Origem</label>
+      <input type="text" readonly class="form-control-plaintext" class="form-control" id="numeroContaOrigem" formControlName="numeroContaOrigem">
+    </div>
+    <div class="mb-3">
+        <label for="saldo" class="form-label">Saldo disponível</label>
+        <input type="text" readonly class="form-control-plaintext" class="form-control" id="saldo" formControlName="saldo">
+    </div>
+    <div class="mb-3">
+      <label for="valor" class="form-label">Valor da Tranferência</label>
+      <input type="text" class="form-control" id="valor" formControlName="valor">
+    </div>
+    <div class="mb-3">
+      <label for="agencia" class="form-label">Agência de Destino</label>
+      <input type="text" class="form-control-plaintext" class="form-control" id="agenciaDestino" formControlName="agenciaDestino">
+    </div>
+    <div class="mb-3">
+      <label for="numero" class="form-label">Conta de Destino</label>
+      <input type="text" class="form-control-plaintext" class="form-control" id="numeroContaDestino" formControlName="numeroContaDestino">
+    </div>
+    <button type="submit" class="btn btn-dark">Transferir</button>
+  </form>

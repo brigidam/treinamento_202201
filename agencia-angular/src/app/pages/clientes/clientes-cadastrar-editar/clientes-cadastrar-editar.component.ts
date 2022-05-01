@@ -1,0 +1,64 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ICliente } from 'src/app/interfaces/cliente';
+import { ClientesService } from 'src/app/services/clientes.service';
+import Swal from 'sweetalert2'
+import { ActivatedRoute, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-clientes-cadastrar-editar',
+  templateUrl: './clientes-cadastrar-editar.component.html',
+  styleUrls: ['./clientes-cadastrar-editar.component.css']
+})
+export class ClientesCadastrarEditarComponent implements OnInit {
+
+  emptyCliente: ICliente = {
+    id: 0,
+    nome: '',
+    cpf: '',
+    email: '',
+    observacoes: '',
+    ativo: true
+  }
+
+  formCliente: FormGroup = this.preencheFormGroup(this.emptyCliente);
+
+  constructor(
+    private clientesService: ClientesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    if (id) {
+      this.clientesService.buscarPorId(id).subscribe((result: ICliente) => {
+        this.formCliente = this.preencheFormGroup(result);
+      }, error => {
+        console.error(error);
+      });
+    }
+  }
+
+  preencheFormGroup(cliente: ICliente): FormGroup {
+    return new FormGroup({
+      id: new FormControl(cliente.id),
+      nome: new FormControl(cliente.nome, Validators.required),
+      cpf: new FormControl(cliente.cpf, Validators.required),
+      email: new FormControl(cliente.email, [
+        Validators.required,
+        Validators.email,
+      ]),
+      observacoes: new FormControl(cliente.observacoes),
+      ativo: new FormControl(cliente.ativo),
+    });
+  }
+
+  enviar() {
+    const cliente: ICliente = this.formCliente.value;
+    this.clientesService.cadastrar(cliente).subscribe((result) => {
+      Swal.fire('Cliente Cadastrado', 'Cadastrado com sucesso!', 'success');
+      this.router.navigate(['/clientes']);
+    });
+  }
+}

@@ -1,0 +1,35 @@
+<br/>
+<div class="card text-center">
+  <div class="card-header">
+    Bem-vindo
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Sistema Bancário</h5>
+    <p class="card-text">Gerenciamento de contas e clientes</p>
+  </div>
+ 
+</div>
+<br/>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Seja nosso Cliente</h5>
+        <p class="card-text">Aprenda a economizar, organizar as suas finanças e fazer o seu dinheiro render mais sendo um de nossos clientes.</p>
+        <a type="button" class="btn btn-dark" [routerLink]="['clientes/cadastrar']">Novo Cliente</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Abra sua Conta</h5>
+        <p class="card-text">Para ter uma conta com a segurança que você merece, inicialmente seja um cliente clicando no botão ao lado.</p>
+        <a type="button" class="btn btn-dark" [routerLink]="['contas/cadastrar']">Criar Conta</a>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted text-center">
+    V1.0
+  </div>
+</div>

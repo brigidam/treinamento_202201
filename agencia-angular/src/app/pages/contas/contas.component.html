@@ -1,21 +1,53 @@
-<p>MINHAS CONTAS</p>
-<table class="table">
+<br/>
+<input
+      type="text"
+      class="form-control"
+      placeholder="Pesquisar Conta"
+      [(ngModel)]="filterTerm" style="width: 350px;"
+    />
+  <br/>
+<table class="table table-striped">
     <thead>
-      <tr>
+      <tr class="table-dark">
         <th scope="col">Agência</th>
         <th scope="col">Número de Conta</th>
         <th scope="col">Saldo</th>
         <th scope="col">Nome do Cliente</th>
         <th scope="col">E-mail do Cliente</th>
+        <th>Ações</th>
+        <th>Operações</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let conta of contas" >
-        <th scope="row"> {{ conta.agencia }}</th>
+      <tr *ngFor="let conta of contas | filter: filterTerm" >
+        <th scope="row">{{ conta.agencia }}</th>
         <td> {{ conta.numero }}</td>
         <td> {{ conta.saldo }}</td>
         <td> {{ conta.cliente.nome }}</td>
         <td> {{ conta.cliente.email }}</td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Ações
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" [routerLink]="['editar', conta.id]">Editar</a></li>
+              <li><a class="dropdown-item" (click)="confirmar(conta.id)">Remover</a></li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Operações
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" [routerLink]="['sacar', conta.id]">Saque</a></li>
+              <li><a class="dropdown-item" [routerLink]="['depositar', conta.id]">Depósito</a></li>
+              <li><a class="dropdown-item" [routerLink]="['transferir', conta.id]">Transferência</a></li>
+            </ul>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

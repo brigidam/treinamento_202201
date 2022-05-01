@@ -1,0 +1,17 @@
+<p>Digite os dados da sua conta e o valor que deseja depositar!</p>
+
+<form [formGroup]="formConta"(ngSubmit)="confirmar()">
+    <div class="mb-3">
+      <label for="agencia" class="form-label">Agência</label>
+      <input type="text" readonly class="form-control-plaintext" class="form-control" id="agencia" formControlName="agencia">
+    </div>
+    <div class="mb-3">
+      <label for="numero" class="form-label">Número da conta</label>
+      <input type="text" readonly class="form-control-plaintext" class="form-control" id="numero" formControlName="numero">
+    </div>
+    <div class="mb-3">
+      <label for="valor" class="form-label">Valor do Depósito</label>
+      <input type="text" class="form-control" id="valor" formControlName="valor">
+    </div>
+    <button type="submit" class="btn btn-dark">Depositar</button>
+  </form>

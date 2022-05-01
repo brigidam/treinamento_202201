@@ -23,6 +23,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private ContaBancariaRepository contaBancariaRepository;
 
 	@Autowired
 	private ExtratoBancarioService extratoBancarioService;
@@ -68,6 +71,23 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		} else {
 			extratoBancarioService.salvarExtrato(valor, LocalDate.now(), tipoTransacao, conta);
 		}
+	}
+	
+	@Override
+	public ContaBancaria salvar(ContaBancaria conta) throws AplicacaoException {
+		
+		ContaBancaria c = repository.findByAgenciaAndNumero(conta.getAgencia(), conta.getNumero());
+		 
+		if (c == null) {
+			conta.setId(null);
+			return contaBancariaRepository.saveAndFlush(conta);
+		}
+		
+		if (!c.getId().equals(conta.getId())) {
+			super.salvar(conta);
+		}
+		
+		return super.salvar(conta);
 	}
 
 	public ContaBancaria consultarConta(String agencia, String numeroConta) {
